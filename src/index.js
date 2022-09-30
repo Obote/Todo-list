@@ -1,42 +1,80 @@
+// eslint-disable-next-line import/extensions
 import './style.css';
 
-const todoList = document.querySelector('#todoList');
-
-const todoData = [
+const todoList = [
   {
-    description: 'Reading about api',
+    description: 'Read the Bible',
     completed: true,
+    index: 0,
+  },
+  {
+    description: 'Wash the car',
+    completed: true,
+    index: 1,
+  },
+  {
+    description: 'Prepare Breakfast',
+    completed: false,
     index: 2,
   },
   {
-    description: 'Reading about dom manipulation',
+    description: 'Take a bath',
     completed: false,
     index: 3,
   },
-
   {
-    description: 'Joining morning standup',
+    description: 'Play call of duty',
     completed: false,
-    index: 1,
+    index: 4,
+  },
+  {
+    description: 'Practice coding challenges',
+    completed: true,
+    index: 5,
+  },
+  {
+    description: 'Go grocery shopping',
+    completed: true,
+    index: 6,
   },
 ];
 
-const createTodo = (todolists) => {
-  const todos = document.createElement('li');
-  todos.classList.add('todos');
-  todos.innerHTML = `
-                    <input type="checkbox" id="checked" ${todolists.completed ? 'checked' : ''} >
-                    <input type="text" id="mylist" value= "${todolists.description}">
-                    <i class="fa-solid fa-ellipsis-vertical move"></i>
-                    <button id="delete"><i class="fa-solid fa-trash-can"></i></button>`;
-  todoList.appendChild(todos);
-};
+todoList.sort((a, b) => {
+  if (a.index < b.index) return -1;
+  if (a.index > b.index) return 1;
+  return 0;
+});
 
-const addTodo = () => {
-  todoData.sort((a, b) => a.index - b.index);
-  todoData.forEach((todo) => {
-    createTodo(todo);
-  });
-};
-
-window.onload = addTodo();
+const listSection = document.querySelector('#list-items');
+listSection.innerHTML = '';
+for (let i = 0; i < todoList.length; i += 1) {
+  const task = todoList[i];
+  let taskItem = `
+    <li class="d-flex s-between list-item">`;
+  if (task.completed) {
+    taskItem += `<span class="material-icons done" onclick="updateStatus(${task.index}, 'pending')">
+          done
+        </span>
+        <p contenteditable="true" class="completed">
+          ${task.description}
+        </p>
+        `;
+  } else {
+    taskItem += ` <span class="material-icons">
+          check_box_outline_blank
+        </span>
+        <p contenteditable="true">
+          ${task.description}
+        </p>`;
+  }
+  taskItem += `
+      <span class="material-icons  move">
+        delete
+        </span>
+      <!-- <span class="material-icons" onclick="deleteTask(${task.index})">
+        delete
+      </span> -->
+    </li>
+  `;
+  listSection.innerHTML += taskItem;
+}
