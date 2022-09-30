@@ -1,4 +1,5 @@
 import './style.css';
+import List from './list.js';
 
 const todoList = new List();
 todoList.display();
