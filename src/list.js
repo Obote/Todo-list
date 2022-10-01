@@ -13,31 +13,31 @@ export default class List {
     listSection.innerHTML = '';
     this.list.forEach((activity) => {
       let activityItem = `
-          <li class="d-flex s-between list-item" id="item-data-${activity.index}">`;
+        <li class="d-flex s-between list-item" id="item-data-${activity.index}">`;
       if (activity.completed) {
         activityItem += `
-              <span class="material-icons done update-status" data="${activity.index}">
-                done
-              </span>
-              <p contenteditable="true" class="completed activity" data="${activity.index}">
-                ${activity.description}
-              </p>
-              `;
+            <span class="material-icons done update-status" data="${activity.index}">
+              done
+            </span>
+            <p contenteditable="true" class="completed activity" data="${activity.index}">
+              ${activity.description}
+            </p>
+            `;
       } else {
         activityItem += `
-              <span class="material-icons  update-status"  data="${activity.index}">
-                check_box_outline_blank
-              </span>
-              <p contenteditable="true" class="activity" data="${activity.index}">
-                ${activity.description}
-              </p>`;
+            <span class="material-icons  update-status"  data="${activity.index}">
+              check_box_outline_blank
+            </span>
+            <p contenteditable="true" class="activity" data="${activity.index}">
+              ${activity.description}
+            </p>`;
       }
       activityItem += `
-            <span class="material-icons delete-activity" data="${activity.index}">
-              delete
-            </span>
-          </li>
-        `;
+          <span class="material-icons delete-activity" data="${activity.index}">
+            delete
+          </span>
+        </li>
+      `;
       listSection.innerHTML += activityItem;
     });
     this.activateActions();
