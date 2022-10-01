@@ -110,7 +110,7 @@ body {
   cursor: pointer;
   border: none;
   display: none;
-  border-color: none;
+  border-color: #fff;
 }
 
 .move {
@@ -142,5 +142,5 @@ body {
 }
 
 .selection {
-  background-color: '#';
+  background-color: #fff;
 }
